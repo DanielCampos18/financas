@@ -465,6 +465,72 @@ a{color:inherit;text-decoration:none}
 .install-bar .ib-x:hover{background:rgba(255,255,255,.06);color:var(--text-primary)}
 .install-bar .ib-x svg{width:16px;height:16px}
 @media (max-width:760px){.install-bar{bottom:84px}}
+/* Tabs */
+.tabs{display:flex;gap:6px;background:var(--bg-glass);border:1px solid var(--border-glass);padding:5px;border-radius:14px;margin-bottom:18px;box-shadow:var(--highlight-top)}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:10px;font-weight:600;font-size:14px;color:var(--text-muted);transition:color var(--d-base),background var(--d-base)}
+.tab svg{width:17px;height:17px}
+.tab.on{color:#fff;background:var(--violet-deep);box-shadow:0 2px 12px -2px rgba(109,91,230,.55)}
+/* Patrimônio hero */
+.patri-hero{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;justify-content:space-between;background:var(--gradient-hero);border-radius:var(--radius-card);padding:22px 26px;box-shadow:var(--shadow-card),var(--glow-violet);position:relative;overflow:hidden;margin-bottom:16px}
+.patri-hero .lbl{color:rgba(255,255,255,.82);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.patri-hero .val{font-family:var(--font-display);font-weight:700;font-size:34px;color:#fff;letter-spacing:-.02em;margin-top:4px;line-height:1}
+.patri-hero .parts{display:flex;gap:22px;flex-wrap:wrap}
+.patri-hero .part .k{color:rgba(255,255,255,.78);font-size:11.5px;font-weight:500}
+.patri-hero .part .v{color:#fff;font-weight:600;font-size:16px;font-variant-numeric:tabular-nums;margin-top:2px}
+/* Goal cards / rings */
+.goals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:16px}
+.goal-card{padding:20px;display:flex;flex-direction:column;gap:13px;transition:transform var(--d-base),box-shadow var(--d-base)}
+.goal-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card),var(--glow-violet)}
+.goal-top{display:flex;align-items:center;gap:12px}
+.goal-ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.goal-ic svg{width:20px;height:20px}
+.goal-name{font-weight:600;font-size:15.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ring{position:relative;width:128px;height:128px;margin:2px auto}
+.ring .rbg{position:absolute;inset:0;border-radius:50%;transition:background .6s var(--ease-out-expo)}
+.ring .rin{position:absolute;inset:11px;border-radius:50%;background:var(--bg-surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .rpct{font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:-.02em}
+.ring .rlbl{font-size:9.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-top:1px}
+.goal-amts{display:flex;justify-content:space-between;font-size:13px;font-variant-numeric:tabular-nums}
+.goal-amts .saved{font-weight:600}
+.goal-amts .target{color:var(--text-muted)}
+.goal-actions{display:flex;gap:8px}
+.goal-actions .btn-primary,.goal-actions .btn-ghost{flex:1;justify-content:center;padding:9px}
+.goal-bar{height:7px;border-radius:99px;background:var(--bg-surface);overflow:hidden}
+.goal-bar i{display:block;height:100%;border-radius:99px;transition:width .6s var(--ease-out-expo)}
+/* Investment groups */
+.inv-group{border:1px solid var(--border-glass);border-radius:13px;margin-bottom:10px;overflow:hidden;background:var(--bg-glass)}
+.inv-ghead{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer;transition:background var(--d-fast)}
+.inv-ghead:hover{background:rgba(255,255,255,.04)}
+.inv-ghead .gdot{width:11px;height:11px;border-radius:4px;flex-shrink:0}
+.inv-ghead .gname{font-weight:600;flex:1}
+.inv-ghead .gval{font-weight:700;font-variant-numeric:tabular-nums;font-family:var(--font-display)}
+.inv-ghead .chev{transition:transform var(--d-base);color:var(--text-muted);display:grid;place-items:center}
+.inv-ghead .chev svg{width:17px;height:17px}
+.inv-ghead.open .chev{transform:rotate(90deg)}
+.inv-body{border-top:1px solid var(--divider);padding:4px 15px}
+.cls-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600}
+.cls-fixa{background:var(--success-tint);color:var(--success)}
+.cls-variavel{background:rgba(139,124,246,.16);color:var(--violet-soft)}
+.seg-mini{display:inline-flex;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:99px;padding:3px}
+.seg-mini button{padding:6px 14px;border-radius:99px;font-size:12.5px;font-weight:600;color:var(--text-muted);transition:all var(--d-fast)}
+.seg-mini button.on{background:var(--violet-deep);color:#fff}
+/* Editable income */
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px}
+.inc-field{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-input);padding:12px 14px;transition:border-color var(--d-fast),box-shadow var(--d-fast)}
+.inc-field:focus-within{border-color:var(--violet-primary);box-shadow:var(--focus-ring)}
+.inc-field .k{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.inc-field .k svg{width:13px;height:13px}
+.inc-field .wrap{display:flex;align-items:baseline;gap:5px}
+.inc-field .pre{color:var(--text-muted);font-weight:600;font-size:14px}
+.inc-field input{width:100%;background:transparent;border:none;outline:none;font-family:var(--font-display);font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;color:var(--text-primary)}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:6px 0}
+.more-item{display:flex;align-items:center;gap:12px;padding:15px;border-radius:13px;background:var(--bg-surface);border:1px solid var(--border);transition:border-color var(--d-fast)}
+.more-item:hover{border-color:var(--violet-primary)}
+.more-item .mic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(139,124,246,.13);color:var(--violet-primary)}
+.more-item .mic svg{width:19px;height:19px}
+.more-item .mt{font-weight:600;font-size:14.5px}
+.mini-donut{position:relative;height:150px}
+@media (max-width:760px){.patri-hero .val{font-size:28px}}
 </style>
 </head>
 <body>
@@ -542,7 +608,14 @@ function seedCategories(){const d=[
   ["Presentes","gift"],["Outros","circle-dollar-sign"],
 ];return d.map((x,i)=>({id:uid(),name:x[0],icon:x[1],color:PALETTE[i%PALETTE.length],archived:false}));}
 
-function freshDB(){return{schemaVersion:SCHEMA,expenses:[],banks:seedBanks(),categories:seedCategories(),overrides:{},settings:{currency:"BRL",monthStartDay:1,theme:"dark",forecastHorizon:12}};}
+function seedInvestmentTypes(){const d=[
+  ["Tesouro Selic","fixa","#34D399"],["Tesouro IPCA+","fixa","#10B981"],["CDB","fixa","#22D3EE"],
+  ["LCI / LCA","fixa","#38BDF8"],["Poupança","fixa","#60A5FA"],
+  ["Ações","variavel","#8B7CF6"],["FIIs","variavel","#A78BFA"],["Fundos","variavel","#F472B6"],
+  ["ETFs","variavel","#FB923C"],["Cripto","variavel","#FBBF24"],
+];return d.map(x=>({id:uid(),name:x[0],klass:x[1],color:x[2],archived:false}));}
+
+function freshDB(){return{schemaVersion:SCHEMA,expenses:[],banks:seedBanks(),categories:seedCategories(),goals:[],investments:[],investmentTypes:seedInvestmentTypes(),income:{},overrides:{},settings:{currency:"BRL",monthStartDay:1,theme:"dark",forecastHorizon:12}};}
 
 function load(){
   let raw=null;
@@ -554,6 +627,10 @@ function load(){
   db.banks=Array.isArray(raw.banks)&&raw.banks.length?raw.banks:seedBanks();
   db.categories=Array.isArray(raw.categories)&&raw.categories.length?raw.categories:seedCategories();
   db.overrides=raw.overrides||{};
+  db.goals=Array.isArray(raw.goals)?raw.goals:[];
+  db.investments=Array.isArray(raw.investments)?raw.investments:[];
+  db.investmentTypes=Array.isArray(raw.investmentTypes)&&raw.investmentTypes.length?raw.investmentTypes:seedInvestmentTypes();
+  db.income=(raw.income&&typeof raw.income==="object")?raw.income:{};
   db.settings=Object.assign(freshDB().settings,raw.settings||{});
   db.schemaVersion=SCHEMA;
 }
@@ -748,11 +825,13 @@ function showPinLock(){
 const NAV=[
   {id:"visao-geral",label:"Visão Geral",icon:"layout-dashboard"},
   {id:"lancamentos",label:"Lançamentos",icon:"list"},
+  {id:"patrimonio",label:"Patrimônio",icon:"piggy-bank"},
   {id:"analises",label:"Análises",icon:"bar-chart-3"},
   {id:"recorrencias",label:"Recorrências",icon:"repeat"},
   {id:"config",label:"Configurações",icon:"settings"},
 ];
-const TITLES={"visao-geral":"Visão Geral","lancamentos":"Lançamentos","analises":"Análises","recorrencias":"Recorrências","config":"Configurações"};
+const TITLES={"visao-geral":"Visão Geral","lancamentos":"Lançamentos","patrimonio":"Patrimônio","analises":"Análises","recorrencias":"Recorrências","config":"Configurações"};
+const MOBILE_MORE=["analises","recorrencias","config"];
 
 function renderShell(){
   const shell=$("#shell");
@@ -787,9 +866,10 @@ function renderShell(){
     <main class="content" id="content"></main>
   </div>
   <nav class="mobile-nav">
-    ${NAV.slice(0,2).map(n=>`<a class="mn-item ${state.route===n.id?"active":""}" data-route="${n.id}">${icon(n.icon)}<span>${n.label.split(" ")[0]}</span></a>`).join("")}
+    ${["visao-geral","lancamentos"].map(id=>{const n=NAV.find(x=>x.id===id);return `<a class="mn-item ${state.route===id?"active":""}" data-route="${id}">${icon(n.icon)}<span>${n.label.split(" ")[0]}</span></a>`;}).join("")}
     <div class="mn-spacer"></div>
-    ${NAV.slice(2,4).map(n=>`<a class="mn-item ${state.route===n.id?"active":""}" data-route="${n.id}">${icon(n.icon)}<span>${n.label}</span></a>`).join("")}
+    <a class="mn-item ${state.route==="patrimonio"?"active":""}" data-route="patrimonio">${icon("piggy-bank")}<span>Patrimônio</span></a>
+    <a class="mn-item ${MOBILE_MORE.includes(state.route)?"active":""}" data-act="more">${icon("menu")}<span>Mais</span></a>
   </nav>
   <button class="fab" data-act="new">${icon("plus")}</button>`;
 
@@ -801,6 +881,16 @@ function renderShell(){
   $("#bankFilter").onchange=e=>{state.bankFilter=e.target.value;renderApp();};
   const tb=$('[data-act="theme"]');if(tb)tb.onclick=()=>{db.settings.theme=db.settings.theme==="dark"?"light":"dark";commit();};
   const lb=$('[data-act="lock"]');if(lb)lb.onclick=()=>{showPinLock();};
+  const mb=$('[data-act="more"]');if(mb)mb.onclick=()=>openMoreMenu();
+}
+function openMoreMenu(){
+  const root=$("#modal-root");
+  root.innerHTML=`<div class="scrim"><div class="sheet" style="max-width:440px"><div class="sheet-head"><h2>Mais</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+    <div class="sheet-body"><div class="more-grid">${MOBILE_MORE.map(id=>{const n=NAV.find(x=>x.id===id);return `<button class="more-item" data-go="${id}"><span class="mic">${icon(n.icon)}</span><span class="mt">${n.label}</span></button>`;}).join("")}</div></div></div></div>`;
+  const close=()=>root.innerHTML="";
+  $("#x").onclick=close;$(".scrim").onclick=e=>{if(e.target.classList.contains("scrim"))close();};
+  $$("[data-go]").forEach(b=>b.onclick=()=>{state.route=b.dataset.go;close();renderApp();});
+  refreshIcons();
 }
 
 // filtra ocorrências pelo banco do header
@@ -821,12 +911,12 @@ function renderDashboard(c){
   const ticket=occ.length?Math.round(total/occ.length):0;
 
   if(occ.length===0){
-    c.innerHTML=kpiRow(total,cmp,maiorCat,comprometido)+`
+    c.innerHTML=kpiRow(total,cmp,maiorCat,comprometido)+renderIncomeCard(M)+`
       <div class="glass" style="margin-top:18px">${emptyState("wallet","Nenhum gasto em "+monthLabel(M),"Comece adicionando seu primeiro gasto deste mês para ver tudo organizado aqui.","Adicionar gasto")}</div>`;
-    bindKpi(total,cmp,comprometido);bindEmpty(c);refreshIcons();return;
+    bindKpi(total,cmp,comprometido);bindEmpty(c);bindIncomeCard(c,M);refreshIcons();return;
   }
 
-  c.innerHTML=kpiRow(total,cmp,maiorCat,comprometido)+`
+  c.innerHTML=kpiRow(total,cmp,maiorCat,comprometido)+renderIncomeCard(M)+`
     <div class="grid-2">
       <div class="glass chart-card">
         <div class="section-title">${icon("pie-chart")} Por categoria <span class="sub">${occ.length} lançamentos</span></div>
@@ -852,7 +942,7 @@ function renderDashboard(c){
       ${occ.slice().sort((a,b)=>b.effectiveDate.localeCompare(a.effectiveDate)).slice(0,5).map((o,i)=>txRow(o,i)).join("")}
     </div>`;
 
-  bindKpi(total,cmp,comprometido);
+  bindKpi(total,cmp,comprometido);bindIncomeCard(c,M);
   $$("[data-cat]",c).forEach(r=>r.onclick=()=>{state.filters={methods:[],cats:[r.dataset.cat],banks:[],search:"",type:"all"};state.route="lancamentos";renderApp();});
   const vt=$('[data-route="lancamentos"]',c);if(vt)vt.onclick=()=>{state.route="lancamentos";renderApp();};
   bindTxRows(c);
@@ -1389,11 +1479,291 @@ function renderApp(){
   destroyCharts();
   renderShell();
   const c=$("#content");
-  const map={"visao-geral":renderDashboard,"lancamentos":renderLancamentos,"analises":renderAnalises,"recorrencias":renderRecorrencias,"config":renderConfig};
+  const map={"visao-geral":renderDashboard,"lancamentos":renderLancamentos,"patrimonio":renderPatrimonio,"analises":renderAnalises,"recorrencias":renderRecorrencias,"config":renderConfig};
   (map[state.route]||renderDashboard)(c);
   refreshIcons();
 }
 function bootApp(){applyTheme();renderApp();initialPull();}
+
+// ====================================================================
+// 16c. PATRIMÔNIO — Investimentos · Cofres · Receitas/Saldo
+// ====================================================================
+const getInvType=id=>db.investmentTypes.find(t=>t.id===id)||null;
+const invTypeName=id=>{const t=getInvType(id);return t?t.name:"Outro";};
+const invTypeColor=id=>{const t=getInvType(id);return t?t.color:"#8B7CF6";};
+const invTypeClass=id=>{const t=getInvType(id);return t?t.klass:"fixa";};
+function totalInvestido(){return db.investments.reduce((s,i)=>s+i.amount,0);}
+function investParClasse(){return db.investments.reduce((a,i)=>{const k=invTypeClass(i.typeId);a[k]=(a[k]||0)+i.amount;return a;},{fixa:0,variavel:0});}
+function investPorTipo(){return db.investments.reduce((a,i)=>{a[i.typeId]=(a[i.typeId]||0)+i.amount;return a;},{});}
+function getIncome(M){const x=db.income[M]||{};return{salary:x.salary||0,other:x.other||0,balance:x.balance||0};}
+function setIncome(M,obj){db.income[M]=Object.assign(getIncome(M),obj);}
+function sobraDoMes(M){const inc=getIncome(M);return inc.salary+inc.other-totalDoMes(M);}
+function totalCofres(){return db.goals.reduce((s,g)=>s+(g.saved||0),0);}
+function patrimonioTotal(M){return getIncome(M).balance+totalInvestido()+totalCofres();}
+function goalPct(g){return g.target>0?Math.min(100,Math.round((g.saved||0)/g.target*100)):0;}
+
+function maskCents(el,initial){el.dataset.cents=initial||0;el.value=initial?(initial/100).toLocaleString("pt-BR",{minimumFractionDigits:2}):"";el.inputMode="numeric";el.addEventListener("input",()=>{const d=el.value.replace(/\D/g,"");const c=d?parseInt(d,10):0;el.dataset.cents=c;el.value=c?(c/100).toLocaleString("pt-BR",{minimumFractionDigits:2}):"";});}
+const centsOf=el=>parseInt(el.dataset.cents||"0",10);
+function repaintPatri(){renderPatrimonio($("#content"));}
+
+function patriHero(M){
+  return `<div class="patri-hero">
+    <div><div class="lbl">Patrimônio total</div><div class="val num" id="kpi-patri">${fmtBRL(patrimonioTotal(M))}</div></div>
+    <div class="parts">
+      <div class="part"><div class="k">Saldo em conta</div><div class="v">${fmtBRL(getIncome(M).balance)}</div></div>
+      <div class="part"><div class="k">Investido</div><div class="v">${fmtBRL(totalInvestido())}</div></div>
+      <div class="part"><div class="k">Cofres</div><div class="v">${fmtBRL(totalCofres())}</div></div>
+    </div></div>`;
+}
+function renderPatrimonio(c){
+  destroyCharts();
+  const M=state.month;const tab=state.patrimonioTab||"investimentos";
+  c.innerHTML=`${patriHero(M)}
+    <div class="tabs">
+      <button class="tab ${tab==='investimentos'?'on':''}" data-tab="investimentos">${icon("trending-up")} Investimentos</button>
+      <button class="tab ${tab==='cofres'?'on':''}" data-tab="cofres">${icon("piggy-bank")} Cofres & Metas</button>
+    </div><div id="patri-body"></div>`;
+  $$(".tab",c).forEach(b=>b.onclick=()=>{state.patrimonioTab=b.dataset.tab;state.invFilter={};repaintPatri();});
+  const body=$("#patri-body",c);
+  if(tab==="investimentos")renderInvestimentos(body);else renderCofres(body);
+  const kp=$("#kpi-patri");if(kp){kp.dataset.val=0;animateValue(kp,patrimonioTotal(M));}
+  refreshIcons();
+}
+
+// ---- INVESTIMENTOS ----
+function renderInvestimentos(c){
+  const invs=db.investments,total=totalInvestido(),cls=investParClasse();
+  const head=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"><button class="btn-primary" data-add-inv>${icon("plus")} Investimento</button><button class="btn-ghost" data-manage-types>${icon("sliders-horizontal")} Tipos</button></div>`;
+  if(!invs.length){
+    c.innerHTML=head+`<div class="glass">${emptyState("trending-up","Nenhum investimento ainda","Cadastre Tesouro, Ações, Fundos e mais para acompanhar sua carteira por classe e tipo.","Adicionar investimento")}</div>`;
+    const cta=$("[data-empty-cta]",c);if(cta)cta.onclick=()=>openInvestmentModal();
+    $("[data-add-inv]",c).onclick=()=>openInvestmentModal();
+    $("[data-manage-types]",c).onclick=()=>manageInvTypes();
+    return;
+  }
+  const f=state.invFilter||{};
+  const fixaPct=total?Math.round(cls.fixa/total*100):0;
+  const classData=[{key:"fixa",label:"Renda Fixa",value:cls.fixa,color:"#34D399"},{key:"variavel",label:"Renda Variável",value:cls.variavel,color:"#8B7CF6"}].filter(d=>d.value>0);
+  const typeData=Object.entries(investPorTipo()).map(([id,v])=>({key:id,label:invTypeName(id),value:v,color:invTypeColor(id)})).sort((a,b)=>b.value-a.value);
+  let list=invs.slice();
+  if(f.class)list=list.filter(i=>invTypeClass(i.typeId)===f.class);
+  if(f.typeId)list=list.filter(i=>i.typeId===f.typeId);
+  const groups={};list.forEach(i=>{(groups[i.typeId]=groups[i.typeId]||[]).push(i);});
+  const groupIds=Object.keys(groups).sort((a,b)=>groups[b].reduce((s,i)=>s+i.amount,0)-groups[a].reduce((s,i)=>s+i.amount,0));
+
+  c.innerHTML=head+`
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="glass kpi"><div class="ic">${icon("landmark")}</div><div class="lbl">Total investido</div><div class="val num" id="kpi-inv">${fmtBRL(total)}</div></div>
+      <div class="glass kpi"><div class="ic" style="background:var(--success-tint);color:var(--success)">${icon("shield-check")}</div><div class="lbl">Renda Fixa</div><div class="val sm num">${fmtBRL(cls.fixa)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:6px">${fixaPct}% da carteira</div></div>
+      <div class="glass kpi"><div class="ic" style="background:rgba(139,124,246,.14);color:var(--violet-primary)">${icon("activity")}</div><div class="lbl">Renda Variável</div><div class="val sm num">${fmtBRL(cls.variavel)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:6px">${100-fixaPct}% da carteira</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="glass chart-card">
+        <div class="section-title">${icon("pie-chart")} Por classe <span class="sub">clique para filtrar</span></div>
+        <div class="donut-wrap"><canvas id="ch-class"></canvas><div class="donut-center"><div class="c-lbl">Carteira</div><div class="c-val num">${fmtBRLshort(total)}</div></div></div>
+        <div class="legend">${classData.map(d=>`<div class="legend-row" data-fclass="${d.key}" style="${f.class&&f.class!==d.key?'opacity:.4':''}"><span class="dot" style="background:${d.color}"></span><span class="nm">${d.label}</span><span class="vl num">${fmtBRL(d.value)}</span><span class="pc num">${total?Math.round(d.value/total*100):0}%</span></div>`).join("")}</div>
+      </div>
+      <div class="glass chart-card">
+        <div class="section-title">${icon("bar-chart-3")} Por tipo <span class="sub">clique para filtrar</span></div>
+        <div class="chart-box"><canvas id="ch-type"></canvas></div>
+      </div>
+    </div>
+    ${(f.class||f.typeId)?`<div class="chips" style="margin-top:16px">${f.class?`<span class="chip">${f.class==="fixa"?"Renda Fixa":"Renda Variável"} <button data-clearf="class">${icon("x")}</button></span>`:""}${f.typeId?`<span class="chip">${esc(invTypeName(f.typeId))} <button data-clearf="typeId">${icon("x")}</button></span>`:""}<button class="chip clear" data-clearf="all">Limpar</button></div>`:""}
+    <div class="glass list-card" style="margin-top:16px">
+      <div class="section-title">${icon("list")} Meus investimentos <span class="sub num">${fmtBRL(list.reduce((s,i)=>s+i.amount,0))}</span></div>
+      ${groupIds.map(tid=>{const items=groups[tid];const gv=items.reduce((s,i)=>s+i.amount,0);const open=!state.invExpanded||state.invExpanded[tid]!==false;return `
+        <div class="inv-group">
+          <div class="inv-ghead ${open?"open":""}" data-grp="${tid}">
+            <span class="gdot" style="background:${invTypeColor(tid)}"></span>
+            <span class="gname">${esc(invTypeName(tid))} <span class="cls-pill cls-${invTypeClass(tid)}" style="margin-left:6px">${invTypeClass(tid)==="fixa"?"Fixa":"Variável"}</span></span>
+            <span class="gval num">${fmtBRL(gv)}</span><span class="chev">${icon("chevron-right")}</span>
+          </div>
+          ${open?`<div class="inv-body">${items.slice().sort((a,b)=>b.amount-a.amount).map(i=>`<div class="list-row" data-inv="${i.id}"><div class="row-main"><div class="row-desc">${esc(i.name)}</div>${i.note?`<div class="row-meta">${esc(i.note)}</div>`:""}</div><div class="row-amt num">${fmtBRL(i.amount)}</div><div class="row-actions"><button class="icon-btn" data-edit-inv>${icon("pencil")}</button><button class="icon-btn danger" data-del-inv>${icon("trash-2")}</button></div></div>`).join("")}</div>`:""}
+        </div>`;}).join("")}
+    </div>`;
+
+  $("[data-add-inv]",c).onclick=()=>openInvestmentModal();
+  $("[data-manage-types]",c).onclick=()=>manageInvTypes();
+  $$("[data-fclass]",c).forEach(r=>r.onclick=()=>{state.invFilter={class:state.invFilter&&state.invFilter.class===r.dataset.fclass?null:r.dataset.fclass};repaintPatri();});
+  $$("[data-clearf]",c).forEach(b=>b.onclick=()=>{const k=b.dataset.clearf;if(k==="all")state.invFilter={};else{state.invFilter=state.invFilter||{};state.invFilter[k]=null;}repaintPatri();});
+  $$("[data-grp]",c).forEach(h=>h.onclick=()=>{state.invExpanded=state.invExpanded||{};const tid=h.dataset.grp;state.invExpanded[tid]=state.invExpanded[tid]===false?true:false;repaintPatri();});
+  $$("[data-inv]",c).forEach(row=>{const id=row.dataset.inv;const get=()=>db.investments.find(x=>x.id===id);
+    row.querySelector("[data-edit-inv]").onclick=e=>{e.stopPropagation();openInvestmentModal(get());};
+    row.querySelector("[data-del-inv]").onclick=e=>{e.stopPropagation();const inv=get();confirmDialog("Excluir investimento?",`"${inv.name}" será removido da carteira.`,()=>{db.investments=db.investments.filter(x=>x.id!==id);commit();toast("Investimento removido","info");});};
+  });
+  const kpi=$("#kpi-inv");if(kpi){kpi.dataset.val=0;animateValue(kpi,total);}
+  refreshIcons();
+  buildClickDonut("ch-class",classData,total,d=>{state.invFilter={class:state.invFilter&&state.invFilter.class===d.key?null:d.key};repaintPatri();});
+  buildTypeBar("ch-type",typeData,d=>{state.invFilter={typeId:state.invFilter&&state.invFilter.typeId===d.key?null:d.key};repaintPatri();});
+}
+
+// ---- COFRES / METAS ----
+function renderCofres(c){
+  const goals=db.goals;
+  const head=`<div style="margin-bottom:16px"><button class="btn-primary" data-add-goal>${icon("plus")} Novo cofre</button></div>`;
+  if(!goals.length){
+    c.innerHTML=head+`<div class="glass">${emptyState("piggy-bank","Nenhum cofre ainda","Crie cofres para suas metas (Viagem, Reserva de emergência, Carro…) e acompanhe o progresso de cada objetivo.","Criar cofre")}</div>`;
+    const cta=$("[data-empty-cta]",c);if(cta)cta.onclick=()=>openGoalModal();
+    $("[data-add-goal]",c).onclick=()=>openGoalModal();
+    return;
+  }
+  const totalSaved=totalCofres(),totalTarget=goals.reduce((s,g)=>s+(g.target||0),0);
+  const overallPct=totalTarget?Math.min(100,Math.round(totalSaved/totalTarget*100)):0;
+  c.innerHTML=head+`
+    ${goals.length>1?`<div class="grid-2" style="margin-bottom:16px">
+      <div class="glass chart-card"><div class="section-title">${icon("pie-chart")} Distribuição</div><div class="donut-wrap" style="height:200px"><canvas id="ch-goals"></canvas><div class="donut-center"><div class="c-lbl">Guardado</div><div class="c-val num">${fmtBRLshort(totalSaved)}</div></div></div></div>
+      <div class="glass chart-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+        <div class="ring" style="width:150px;height:150px"><div class="rbg" style="background:conic-gradient(var(--violet-primary) ${overallPct}%, var(--border) 0)"></div><div class="rin"><div class="rpct">${overallPct}%</div><div class="rlbl">do total</div></div></div>
+        <div style="margin-top:14px"><div class="num" style="font-family:var(--font-display);font-weight:700;font-size:18px">${fmtBRL(totalSaved)}</div><div style="color:var(--text-muted);font-size:13px">de ${fmtBRL(totalTarget)} em ${goals.length} cofres</div></div>
+      </div></div>`:""}
+    <div class="goals-grid">${goals.map(g=>goalCard(g)).join("")}</div>`;
+
+  $("[data-add-goal]",c).onclick=()=>openGoalModal();
+  $$("[data-goal]",c).forEach(card=>{const id=card.dataset.goal;const get=()=>db.goals.find(x=>x.id===id);
+    card.querySelector("[data-edit-goal]").onclick=()=>openGoalModal(get());
+    card.querySelector("[data-dep-goal]").onclick=()=>openGoalDeposit(get(),1);
+    card.querySelector("[data-wd-goal]").onclick=()=>openGoalDeposit(get(),-1);
+  });
+  refreshIcons();
+  if(goals.length>1)buildGoalsDonut("ch-goals",goals);
+}
+function goalCard(g){
+  const pct=goalPct(g),done=pct>=100;
+  return `<div class="glass goal-card" data-goal="${g.id}">
+    <div class="goal-top"><div class="goal-ic" style="background:${g.color}22;color:${g.color}">${icon(g.icon||"target")}</div><div class="goal-name">${esc(g.name)}</div><button class="icon-btn" data-edit-goal>${icon("pencil")}</button></div>
+    <div class="ring"><div class="rbg" style="background:conic-gradient(${g.color} ${pct}%, var(--border) 0)"></div><div class="rin"><div class="rpct" style="color:${done?'var(--success)':'var(--text-primary)'}">${pct}%</div><div class="rlbl">${done?'concluído':'atingido'}</div></div></div>
+    <div class="goal-amts"><span class="saved" style="color:${g.color}">${fmtBRL(g.saved||0)}</span><span class="target">de ${fmtBRL(g.target||0)}</span></div>
+    <div class="goal-actions"><button class="btn-primary" data-dep-goal>${icon("plus")} Guardar</button><button class="btn-ghost" data-wd-goal>${icon("minus")} Resgatar</button></div>
+  </div>`;
+}
+
+// ---- RECEITAS & SALDO (card da Visão Geral) ----
+function renderIncomeCard(M){
+  const inc=getIncome(M),sobra=sobraDoMes(M),gastos=totalDoMes(M);
+  const renda=inc.salary+inc.other,rate=renda>0?Math.round(sobra/renda*100):0;
+  return `<div class="glass chart-card" style="margin-bottom:18px">
+    <div class="section-title">${icon("wallet")} Receitas & Saldo <span class="sub" data-edit-income style="cursor:pointer;color:var(--violet-primary)">Editar →</span></div>
+    <div class="inc-grid">
+      <div class="inc-field"><div class="k">${icon("banknote")} Salário</div><div class="num" style="font-family:var(--font-display);font-weight:700;font-size:19px">${fmtBRL(inc.salary)}</div></div>
+      <div class="inc-field"><div class="k">${icon("circle-plus")} Outras rendas</div><div class="num" style="font-family:var(--font-display);font-weight:700;font-size:19px">${fmtBRL(inc.other)}</div></div>
+      <div class="inc-field"><div class="k">${icon("landmark")} Saldo em conta</div><div class="num" style="font-family:var(--font-display);font-weight:700;font-size:19px">${fmtBRL(inc.balance)}</div></div>
+      <div class="inc-field" style="background:${sobra>=0?'var(--success-tint)':'var(--danger-tint)'};border-color:transparent"><div class="k">${icon("trending-up")} Sobra do mês</div><div class="num" style="font-family:var(--font-display);font-weight:700;font-size:19px;color:${sobra>=0?'var(--success)':'var(--danger)'}">${fmtBRL(sobra)}</div></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Gastos do mês: ${fmtBRL(gastos)}${renda>0?` · você guardou <b style="color:${rate>=0?'var(--success)':'var(--danger)'}">${rate}%</b> da renda`:" · informe seu salário para ver a taxa de poupança"}</p>
+  </div>`;
+}
+function bindIncomeCard(scope,M){const e=$("[data-edit-income]",scope);if(e)e.onclick=()=>openIncomeModal(M);}
+
+// ---- CHART BUILDERS (patrimônio) ----
+function buildClickDonut(id,data,total,onClick){
+  const el=document.getElementById(id);if(!el)return;
+  charts[id]=new Chart(el,{type:"doughnut",data:{labels:data.map(d=>d.label),datasets:[{data:data.map(d=>d.value),backgroundColor:data.map(d=>d.color),borderWidth:2,borderColor:getComputedStyle(document.documentElement).getPropertyValue("--bg-glass").trim()||"#13111F",hoverOffset:7}]},
+    options:{cutout:"66%",onClick:(e,els)=>{if(els&&els.length)onClick(data[els[0].index]);},plugins:{legend:{display:false},tooltip:Object.assign(tooltipCfg(),{callbacks:{label:ctx=>` ${ctx.label}: ${fmtBRL(ctx.parsed)} (${total?Math.round(ctx.parsed/total*100):0}%)`}})},animation:RM()?false:{animateRotate:true,animateScale:true,duration:800,easing:"easeOutQuart"},maintainAspectRatio:false,responsive:true}});
+  el.style.cursor="pointer";
+}
+function buildTypeBar(id,data,onClick){
+  const el=document.getElementById(id);if(!el)return;
+  charts[id]=new Chart(el,{type:"bar",data:{labels:data.map(d=>d.label),datasets:[{data:data.map(d=>d.value),backgroundColor:data.map(d=>d.color),borderRadius:7,maxBarThickness:24}]},
+    options:{indexAxis:"y",onClick:(e,els)=>{if(els&&els.length)onClick(data[els[0].index]);},plugins:{legend:{display:false},tooltip:tooltipCfg()},scales:{x:{grid:{color:gridColor()},ticks:{color:chartFontColor(),callback:v=>fmtBRLshort(v)}},y:{grid:{display:false},ticks:{color:chartFontColor(),font:{family:"Inter"}}}},animation:RM()?false:{duration:700,delay:ctx=>ctx.type==="data"?ctx.dataIndex*40:0},maintainAspectRatio:false,responsive:true}});
+  el.style.cursor="pointer";
+}
+function buildGoalsDonut(id,goals){
+  const el=document.getElementById(id);if(!el)return;
+  const data=goals.filter(g=>(g.saved||0)>0);if(!data.length)return;
+  charts[id]=new Chart(el,{type:"doughnut",data:{labels:data.map(g=>g.name),datasets:[{data:data.map(g=>g.saved),backgroundColor:data.map(g=>g.color),borderWidth:2,borderColor:getComputedStyle(document.documentElement).getPropertyValue("--bg-glass").trim()||"#13111F",hoverOffset:6}]},
+    options:{cutout:"66%",plugins:{legend:{display:false},tooltip:Object.assign(tooltipCfg(),{callbacks:{label:ctx=>` ${ctx.label}: ${fmtBRL(ctx.parsed)}`}})},animation:RM()?false:{animateRotate:true,animateScale:true,duration:800},maintainAspectRatio:false,responsive:true}});
+}
+
+// ---- MODAIS ----
+function openInvestmentModal(existing){
+  const root=$("#modal-root"),isEdit=!!existing,types=db.investmentTypes.filter(t=>!t.archived);
+  const draft=existing?Object.assign({},existing):{id:null,name:"",amount:0,typeId:types[0]&&types[0].id,note:""};
+  root.innerHTML=`<div class="scrim"><div class="sheet"><div class="sheet-head"><h2>${isEdit?"Editar":"Novo"} investimento</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+    <div class="sheet-body">
+      <div class="field"><label>Nome <span class="req">*</span></label><input class="input" id="iname" placeholder="Ex: Tesouro Selic 2029, PETR4, Fundo XP…" value="${esc(draft.name)}"></div>
+      <div class="field"><label>Valor aplicado <span class="req">*</span></label><div class="amount-field"><span class="cur">R$</span><input id="iamount" placeholder="0,00"></div></div>
+      <div class="field"><label>Tipo</label><select class="select" id="itype">${types.map(t=>`<option value="${t.id}" ${draft.typeId===t.id?"selected":""}>${esc(t.name)} · ${t.klass==="fixa"?"Renda Fixa":"Renda Variável"}</option>`).join("")}</select></div>
+      <div class="field"><label>Observações</label><textarea class="textarea" id="inote" placeholder="Vencimento, corretora, rentabilidade…">${esc(draft.note||"")}</textarea></div>
+    </div>
+    <div class="sheet-foot"><button class="btn-ghost" id="cancel">Cancelar</button><button class="btn-primary" id="save">${icon("check")} Salvar</button></div></div></div>`;
+  const close=()=>root.innerHTML="";$("#x").onclick=close;$("#cancel").onclick=close;$(".scrim").onclick=e=>{if(e.target.classList.contains("scrim"))close();};
+  const amt=$("#iamount");maskCents(amt,draft.amount);setTimeout(()=>$("#iname").focus(),60);
+  $("#save").onclick=()=>{const name=$("#iname").value.trim(),amount=centsOf(amt);if(!name||amount<=0){toast("Preencha nome e valor","error");return;}
+    const obj={id:draft.id||uid(),name,amount,typeId:$("#itype").value,note:$("#inote").value.trim(),createdAt:draft.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+    if(draft.id){db.investments[db.investments.findIndex(x=>x.id===draft.id)]=obj;}else db.investments.push(obj);
+    close();commit();toast(isEdit?"Investimento atualizado":"Investimento adicionado");};
+  refreshIcons();
+}
+function openGoalModal(existing){
+  const root=$("#modal-root"),isEdit=!!existing;
+  const ICONS=["target","plane","home","car","graduation-cap","heart","gift","gem","umbrella","baby","gamepad-2","smartphone","briefcase","ring"];
+  const draft=existing?Object.assign({},existing):{id:null,name:"",target:0,saved:0,color:"#8B7CF6",icon:"target",note:""};
+  let selIcon=draft.icon,selColor=draft.color;
+  root.innerHTML=`<div class="scrim"><div class="sheet"><div class="sheet-head"><h2>${isEdit?"Editar":"Novo"} cofre</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+    <div class="sheet-body">
+      <div class="field"><label>Nome do objetivo <span class="req">*</span></label><input class="input" id="gname" placeholder="Ex: Viagem, Reserva, Carro novo…" value="${esc(draft.name)}"></div>
+      <div class="field"><label>Meta (valor a alcançar) <span class="req">*</span></label><div class="amount-field"><span class="cur">R$</span><input id="gtarget" placeholder="0,00"></div></div>
+      ${isEdit?"":`<div class="field"><label>Já guardado (opcional)</label><div class="amount-field"><span class="cur">R$</span><input id="gsaved" placeholder="0,00"></div></div>`}
+      <div class="row-2"><div class="field"><label>Cor</label><input type="color" class="color-input" id="gcolor" value="${draft.color}" style="width:100%"></div>
+      <div class="field"><label>Ícone</label><div class="cat-chips" id="giconrow">${ICONS.map(ic=>`<button type="button" class="cat-chip ${ic===selIcon?"on":""}" data-ic="${ic}" style="padding:9px">${icon(ic)}</button>`).join("")}</div></div></div>
+    </div>
+    <div class="sheet-foot"><button class="btn-ghost" id="cancel">Cancelar</button><button class="btn-primary" id="save">${icon("check")} Salvar</button></div></div></div>`;
+  const close=()=>root.innerHTML="";$("#x").onclick=close;$("#cancel").onclick=close;$(".scrim").onclick=e=>{if(e.target.classList.contains("scrim"))close();};
+  const tgt=$("#gtarget");maskCents(tgt,draft.target);
+  const sv=$("#gsaved");if(sv)maskCents(sv,0);
+  $$("#giconrow .cat-chip").forEach(b=>b.onclick=()=>{selIcon=b.dataset.ic;$$("#giconrow .cat-chip").forEach(x=>x.classList.toggle("on",x===b));});
+  setTimeout(()=>$("#gname").focus(),60);
+  $("#save").onclick=()=>{const name=$("#gname").value.trim(),target=centsOf(tgt);if(!name||target<=0){toast("Preencha nome e meta","error");return;}
+    const obj=Object.assign({},draft,{id:draft.id||uid(),name,target,color:$("#gcolor").value,icon:selIcon,saved:isEdit?draft.saved:(sv?centsOf(sv):0),updatedAt:new Date().toISOString(),createdAt:draft.createdAt||new Date().toISOString()});
+    if(draft.id){db.goals[db.goals.findIndex(x=>x.id===draft.id)]=obj;}else db.goals.push(obj);
+    close();commit();toast(isEdit?"Cofre atualizado":"Cofre criado");};
+  if(isEdit){root.querySelector(".sheet-foot").insertAdjacentHTML("afterbegin",`<button class="btn-ghost btn-danger" id="delGoal">${icon("trash-2")}</button>`);$("#delGoal").onclick=()=>{close();confirmDialog("Excluir cofre?",`"${draft.name}" será removido.`,()=>{db.goals=db.goals.filter(x=>x.id!==draft.id);commit();toast("Cofre removido","info");});};}
+  refreshIcons();
+}
+function openGoalDeposit(g,dir){
+  const root=$("#modal-root"),isDep=dir>0;
+  root.innerHTML=`<div class="scrim"><div class="sheet" style="max-width:400px"><div class="sheet-head"><h2>${isDep?"Guardar em":"Resgatar de"} ${esc(g.name)}</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+    <div class="sheet-body"><div class="field"><label>Valor</label><div class="amount-field"><span class="cur">R$</span><input id="dval" placeholder="0,00"></div><div class="hint">Atual: ${fmtBRL(g.saved||0)} de ${fmtBRL(g.target||0)}</div></div></div>
+    <div class="sheet-foot"><button class="btn-ghost" id="cancel">Cancelar</button><button class="btn-primary" id="save" ${isDep?"":'style="background:var(--danger);box-shadow:none"'}>${isDep?"Guardar":"Resgatar"}</button></div></div></div>`;
+  const close=()=>root.innerHTML="";$("#x").onclick=close;$("#cancel").onclick=close;$(".scrim").onclick=e=>{if(e.target.classList.contains("scrim"))close();};
+  const dv=$("#dval");maskCents(dv,0);setTimeout(()=>dv.focus(),60);
+  $("#save").onclick=()=>{const v=centsOf(dv);if(v<=0){toast("Informe um valor","error");return;}const gg=db.goals.find(x=>x.id===g.id);gg.saved=Math.max(0,(gg.saved||0)+dir*v);gg.updatedAt=new Date().toISOString();close();commit();toast(isDep?"Guardado! 💜":"Resgatado");};
+  refreshIcons();
+}
+function manageInvTypes(){
+  const root=$("#modal-root");
+  const render=()=>{
+    root.innerHTML=`<div class="scrim"><div class="sheet wide"><div class="sheet-head"><h2>Tipos de investimento</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+      <div class="sheet-body"><div class="set-list">${db.investmentTypes.filter(t=>!t.archived).map(t=>`<div class="set-item"><input type="color" class="color-input" data-color="${t.id}" value="${t.color}" style="width:38px;height:34px;padding:3px"><span class="nm">${esc(t.name)}</span><button class="cls-pill cls-${t.klass}" data-toggle="${t.id}">${t.klass==="fixa"?"Renda Fixa":"Renda Variável"}</button><button class="icon-btn danger" data-rm="${t.id}">${icon("trash-2")}</button></div>`).join("")}</div>
+      <div class="add-row"><input class="input" id="ntn" placeholder="Novo tipo…"><select class="select" id="ntc" style="max-width:150px"><option value="fixa">Renda Fixa</option><option value="variavel">Renda Variável</option></select><button class="btn-ghost" id="addT">${icon("plus")} Adicionar</button></div>
+      <p class="hint" style="margin-top:8px">Clique no rótulo para alternar entre Renda Fixa e Variável.</p></div>
+      <div class="sheet-foot"><button class="btn-primary" id="done" style="flex:1">Concluído</button></div></div></div>`;
+    $("#x").onclick=done;$("#done").onclick=done;
+    $("#addT").onclick=()=>{const n=$("#ntn").value.trim();if(!n)return;db.investmentTypes.push({id:uid(),name:n,klass:$("#ntc").value,color:PALETTE[db.investmentTypes.length%PALETTE.length],archived:false});save();render();};
+    $("#ntn").onkeydown=e=>{if(e.key==="Enter")$("#addT").click();};
+    $$("[data-toggle]").forEach(b=>b.onclick=()=>{const t=getInvType(b.dataset.toggle);t.klass=t.klass==="fixa"?"variavel":"fixa";save();render();});
+    $$("[data-color]").forEach(inp=>inp.onchange=()=>{const t=getInvType(inp.dataset.color);t.color=inp.value;save();render();});
+    $$("[data-rm]").forEach(b=>b.onclick=()=>{const id=b.dataset.rm;const used=db.investments.filter(i=>i.typeId===id).length;if(used){toast(`${used} investimento(s) usam esse tipo — reatribua antes`,"error");return;}const t=getInvType(id);t.archived=true;save();render();});
+    refreshIcons();
+  };
+  const done=()=>{root.innerHTML="";commit();};
+  render();
+}
+function openIncomeModal(M){
+  const root=$("#modal-root"),inc=getIncome(M);
+  root.innerHTML=`<div class="scrim"><div class="sheet"><div class="sheet-head"><h2>Receitas & Saldo · ${monthLabel(M)}</h2><button class="icon-btn" id="x">${icon("x")}</button></div>
+    <div class="sheet-body">
+      <div class="field"><label>${icon("banknote")} Salário do mês</label><div class="amount-field"><span class="cur">R$</span><input id="isal" placeholder="0,00"></div></div>
+      <div class="field"><label>${icon("circle-plus")} Outras rendas (freelas, etc.)</label><div class="amount-field"><span class="cur">R$</span><input id="ioth" placeholder="0,00"></div></div>
+      <div class="field"><label>${icon("landmark")} Saldo em conta hoje</label><div class="amount-field"><span class="cur">R$</span><input id="ibal" placeholder="0,00"></div><div class="hint">Atualize a cada mês para acompanhar a evolução do seu saldo.</div></div>
+    </div>
+    <div class="sheet-foot"><button class="btn-ghost" id="cancel">Cancelar</button><button class="btn-primary" id="save">${icon("check")} Salvar</button></div></div></div>`;
+  const close=()=>root.innerHTML="";$("#x").onclick=close;$("#cancel").onclick=close;$(".scrim").onclick=e=>{if(e.target.classList.contains("scrim"))close();};
+  const sal=$("#isal"),oth=$("#ioth"),bal=$("#ibal");maskCents(sal,inc.salary);maskCents(oth,inc.other);maskCents(bal,inc.balance);
+  setTimeout(()=>sal.focus(),60);
+  $("#save").onclick=()=>{setIncome(M,{salary:centsOf(sal),other:centsOf(oth),balance:centsOf(bal)});close();commit();toast("Receitas & saldo atualizados");};
+  refreshIcons();
+}
 
 // ====================================================================
 // 16b. SINCRONIZAÇÃO (repositório privado no GitHub)
