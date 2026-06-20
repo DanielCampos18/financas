@@ -561,7 +561,7 @@ function save(){
   clearTimeout(saveTimer);
   saveTimer=setTimeout(()=>{try{localStorage.setItem(DB_KEY,JSON.stringify(db));}catch(e){toast("Erro ao salvar (armazenamento cheio?)","error");}},250);
 }
-function commit(){save();applyTheme();renderApp();window.dispatchEvent(new CustomEvent("amethyst:change"));}
+function commit(){db.updatedAt=new Date().toISOString();save();applyTheme();renderApp();window.dispatchEvent(new CustomEvent("amethyst:change"));schedulePush();}
 window.addEventListener("storage",e=>{if(e.key===DB_KEY){load();renderApp();}});
 
 const getBank=id=>db.banks.find(b=>b.id===id)||null;
@@ -1115,6 +1115,19 @@ function renderConfig(c){
       <div class="add-row">${hasPin?`<button class="btn-ghost" id="changePin">${icon("key-round")} Alterar PIN</button><button class="btn-ghost btn-danger" id="rmPin">${icon("lock-open")} Remover PIN</button>`:`<button class="btn-primary" id="setPin">${icon("lock")} Definir PIN</button>`}</div>
     </div>
     <div class="glass chart-card">
+      <div class="section-title">${icon("refresh-cw")} Sincronização <span class="sub" id="syncStatus"></span></div>
+      ${sync?`
+        <p class="hint" style="margin-bottom:12px">Conectado a <b>${esc(sync.owner)}/${esc(sync.repo)}</b> (privado).${sync.lastSync?` Última: ${new Date(sync.lastSync).toLocaleString("pt-BR")}`:""}</p>
+        <div class="toggle-row" style="padding-top:0"><div><div style="font-weight:600">Sincronizar automaticamente</div><div class="hint">Envia ao salvar · baixa ao abrir</div></div><div class="switch ${sync.auto?"on":""}" id="syncAuto"></div></div>
+        <div class="add-row"><button class="btn-ghost" id="syncPushNow">${icon("cloud-upload")} Enviar agora</button><button class="btn-ghost" id="syncPullNow">${icon("cloud-download")} Baixar agora</button><button class="btn-ghost btn-danger" id="syncOff">${icon("unplug")} Desconectar</button></div>
+      `:`
+        <p class="hint" style="margin-bottom:12px">Guarde seus dados num repositório <b>privado</b> seu — mesmos dados no celular e no PC.</p>
+        <div class="field"><label>Repositório privado</label><input class="input" id="syncRepo" value="DanielCampos18/financas-dados"></div>
+        <div class="field"><label>Token de acesso</label><input class="input" id="syncTokenIn" type="password" placeholder="github_pat_… ou ghp_…"><div class="hint">Token com permissão <b>Contents: Read and write</b> só nesse repositório. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--violet-primary)">Gerar token →</a></div></div>
+        <div class="add-row"><button class="btn-primary" id="syncConnPush">${icon("cloud-upload")} Conectar e enviar este aparelho</button><button class="btn-ghost" id="syncConnPull">${icon("cloud-download")} Conectar e baixar</button></div>
+      `}
+    </div>
+    <div class="glass chart-card">
       <div class="section-title">${icon("database")} Dados & backup</div>
       <p class="hint" style="margin-bottom:12px">Seus dados ficam só neste navegador. Faça backups regulares.</p>
       <div class="add-row">
@@ -1147,6 +1160,19 @@ function renderConfig(c){
   const sp=$("#setPin");if(sp)sp.onclick=()=>pinSetupModal();
   const cp=$("#changePin");if(cp)cp.onclick=()=>pinSetupModal();
   const rp=$("#rmPin");if(rp)rp.onclick=()=>confirmDialog("Remover PIN?","O app deixará de pedir senha ao abrir.",()=>{removePin();renderApp();toast("PIN removido","info");});
+
+  // sincronização
+  if(sync){
+    const au=$("#syncAuto");if(au)au.onclick=()=>{sync.auto=!sync.auto;saveSync();renderApp();};
+    const pn=$("#syncPushNow");if(pn)pn.onclick=()=>doPush();
+    const pl=$("#syncPullNow");if(pl)pl.onclick=()=>doPull();
+    const off=$("#syncOff");if(off)off.onclick=()=>confirmDialog("Desconectar sincronização?","Os dados continuam neste aparelho; só param de sincronizar com a nuvem.",()=>{sync=null;saveSync();renderApp();toast("Sincronização desconectada","info");});
+    setSyncStatus(sync._status);
+  }else{
+    const parse=()=>{const v=$("#syncRepo").value.trim().replace(/^https?:\/\/github\.com\//i,"").replace(/\.git$/,"");const t=$("#syncTokenIn").value.trim();if(!v.includes("/")||!t){toast("Preencha repositório e token","error");return null;}const p=v.split("/");return{owner:p[0],repo:p[1],token:t,path:"db.json",sha:null,auto:true,lastSync:null};};
+    const cpush=$("#syncConnPush");if(cpush)cpush.onclick=async()=>{const c=parse();if(!c)return;sync=c;saveSync();await doPush();renderApp();};
+    const cpull=$("#syncConnPull");if(cpull)cpull.onclick=async()=>{const c=parse();if(!c)return;sync=c;saveSync();const ok=await doPull();if(!ok){sync=null;saveSync();}renderApp();};
+  }
 
   // dados
   $("#expJson").onclick=()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});downloadBlob(blob,`amethyst-backup-${todayKey()}.json`);toast("Backup exportado");};
@@ -1367,7 +1393,64 @@ function renderApp(){
   (map[state.route]||renderDashboard)(c);
   refreshIcons();
 }
-function bootApp(){applyTheme();renderApp();}
+function bootApp(){applyTheme();renderApp();initialPull();}
+
+// ====================================================================
+// 16b. SINCRONIZAÇÃO (repositório privado no GitHub)
+// ====================================================================
+const SYNC_KEY="amethyst.sync";
+let sync=null;
+try{sync=JSON.parse(localStorage.getItem(SYNC_KEY))||null;}catch(e){sync=null;}
+function saveSync(){if(sync)localStorage.setItem(SYNC_KEY,JSON.stringify(sync));else localStorage.removeItem(SYNC_KEY);}
+function b64encode(s){return btoa(unescape(encodeURIComponent(s)));}
+function b64decode(b){return decodeURIComponent(escape(atob(b.replace(/\s/g,""))));}
+function ghApi(method,path,body){
+  return fetch("https://api.github.com"+path,{method,headers:{"Authorization":"Bearer "+sync.token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:body?JSON.stringify(body):undefined});
+}
+async function ghGetFile(){
+  const res=await ghApi("GET",`/repos/${sync.owner}/${sync.repo}/contents/${encodeURIComponent(sync.path)}`);
+  if(res.status===404)return{exists:false};
+  if(!res.ok)throw new Error("GET "+res.status);
+  const j=await res.json();
+  return{exists:true,sha:j.sha,json:JSON.parse(b64decode(j.content))};
+}
+async function ghPutFile(obj){
+  const body={message:"Amethyst sync "+new Date().toISOString(),content:b64encode(JSON.stringify(obj))};
+  if(sync.sha)body.sha=sync.sha;
+  let res=await ghApi("PUT",`/repos/${sync.owner}/${sync.repo}/contents/${encodeURIComponent(sync.path)}`,body);
+  if(res.status===409||res.status===422){const cur=await ghGetFile();if(cur.exists){sync.sha=cur.sha;body.sha=cur.sha;}res=await ghApi("PUT",`/repos/${sync.owner}/${sync.repo}/contents/${encodeURIComponent(sync.path)}`,body);}
+  if(!res.ok)throw new Error("PUT "+res.status);
+  const j=await res.json();sync.sha=j.content.sha;saveSync();
+}
+let pushTimer=null,syncing=false;
+function setSyncStatus(s){if(sync)sync._status=s;const el=document.getElementById("syncStatus");if(el){el.textContent=({enviando:"enviando…",baixando:"baixando…",ok:"sincronizado ✓",erro:"erro de conexão",vazio:"nuvem vazia"})[s]||"";el.style.color=s==="erro"?"var(--danger)":s==="ok"?"var(--success)":"var(--text-muted)";}}
+function schedulePush(){if(!sync||!sync.auto)return;clearTimeout(pushTimer);pushTimer=setTimeout(doPush,1600);}
+async function doPush(silent){
+  if(!sync||syncing)return;
+  try{syncing=true;setSyncStatus("enviando");db.updatedAt=db.updatedAt||new Date().toISOString();await ghPutFile(db);sync.lastSync=new Date().toISOString();saveSync();setSyncStatus("ok");if(!silent)toast("Enviado para a nuvem");}
+  catch(e){setSyncStatus("erro");if(!silent)toast("Falha ao enviar — verifique o token","error");}
+  finally{syncing=false;}
+}
+async function doPull(silent){
+  if(!sync||syncing)return false;
+  try{syncing=true;setSyncStatus("baixando");const r=await ghGetFile();
+    if(r.exists&&r.json&&Array.isArray(r.json.expenses)){sync.sha=r.sha;db=Object.assign(freshDB(),r.json);db.schemaVersion=SCHEMA;save();sync.lastSync=new Date().toISOString();saveSync();applyTheme();renderApp();setSyncStatus("ok");if(!silent)toast("Dados baixados da nuvem");return true;}
+    setSyncStatus("vazio");if(!silent)toast("A nuvem ainda está vazia","info");return false;}
+  catch(e){setSyncStatus("erro");if(!silent)toast("Falha ao baixar — verifique o token","error");return false;}
+  finally{syncing=false;}
+}
+// Na abertura: baixa silenciosamente só se a nuvem estiver mais nova que o local.
+async function initialPull(){
+  if(!sync||!sync.auto)return;
+  try{const r=await ghGetFile();
+    if(r.exists&&r.json&&Array.isArray(r.json.expenses)){
+      sync.sha=r.sha;const remoteAt=r.json.updatedAt||"",localAt=db.updatedAt||"";
+      if(remoteAt>localAt){db=Object.assign(freshDB(),r.json);db.schemaVersion=SCHEMA;save();applyTheme();renderApp();}
+      else if(localAt>remoteAt){doPush(true);}
+      saveSync();setSyncStatus("ok");
+    }
+  }catch(e){setSyncStatus("erro");}
+}
 
 // ====================================================================
 // 17. INIT
