@@ -59,6 +59,17 @@ Depois é só ativar o Pages (passos 3–5 acima).
 
 ---
 
+## 📲 Instalar como app no celular (PWA)
+
+O app é um **PWA** — vira um aplicativo de verdade na tela inicial, sem loja de apps:
+
+- **Android (Chrome):** abra o link → aparece o aviso **"Instalar no celular"** (ou menu ⋮ → *Instalar app / Adicionar à tela inicial*). Pronto: ícone na tela inicial, abre em **tela cheia** e funciona **offline**.
+- **iPhone (Safari):** abra o link → toque em **Compartilhar** → **"Adicionar à Tela de Início"**.
+
+Depois de instalado, ele abre como qualquer app, sem barra de navegador. Os dados continuam só no seu aparelho.
+
+> Como os dados ficam por aparelho, celular e computador têm bases separadas. Para usar os mesmos dados nos dois, use **Exportar/Importar backup (JSON)** — ou peça pra ativarmos sincronização em nuvem privada.
+
 ## 🖥️ Rodar localmente
 
 Basta **abrir o `index.html`** com duplo clique no navegador. Não precisa de servidor.

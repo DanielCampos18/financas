@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0B0A14" />
 <title>Amethyst · Controle Financeiro</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Amethyst" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -446,6 +453,18 @@ a{color:inherit;text-decoration:none}
   .day-head{top:64px}
 }
 .hidden{display:none!important}
+/* Install banner (PWA) */
+.install-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:90;display:flex;align-items:center;gap:13px;padding:12px 14px 12px 16px;border-radius:16px;background:var(--bg-elevated);border:1px solid var(--border);box-shadow:var(--shadow-float);max-width:calc(100vw - 32px);animation:toastIn .4s var(--ease-spring) both}
+.install-bar .ib-logo{width:38px;height:38px;border-radius:11px;background:var(--gradient-hero);display:grid;place-items:center;flex-shrink:0;box-shadow:var(--glow-violet)}
+.install-bar .ib-logo svg{width:20px;height:20px;color:#fff}
+.install-bar .ib-tx{font-size:13px;line-height:1.35}
+.install-bar .ib-tx b{font-weight:600}
+.install-bar .ib-tx span{color:var(--text-muted)}
+.install-bar .ib-go{padding:9px 15px;border-radius:10px;background:var(--gradient-hero);color:#fff;font-weight:600;font-size:13.5px;box-shadow:var(--glow-violet);white-space:nowrap}
+.install-bar .ib-x{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--text-muted)}
+.install-bar .ib-x:hover{background:rgba(255,255,255,.06);color:var(--text-primary)}
+.install-bar .ib-x svg{width:16px;height:16px}
+@media (max-width:760px){.install-bar{bottom:84px}}
 </style>
 </head>
 <body>
@@ -1355,6 +1374,31 @@ function bootApp(){applyTheme();renderApp();}
 // ====================================================================
 load();
 if(getAuth())showPinLock();else bootApp();
+})();
+</script>
+
+<div class="install-bar hidden" id="installBar">
+  <div class="ib-logo"><i data-lucide="gem"></i></div>
+  <div class="ib-tx" id="ibText"><b>Instalar no celular</b><br><span>Use como app, em tela cheia</span></div>
+  <button class="ib-go" id="ibGo">Instalar</button>
+  <button class="ib-x" id="ibX" aria-label="Fechar"><i data-lucide="x"></i></button>
+</div>
+<script>
+(function(){
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+  var bar=document.getElementById('installBar'),go=document.getElementById('ibGo'),x=document.getElementById('ibX'),txt=document.getElementById('ibText');
+  var deferred=null;
+  var dismissed=localStorage.getItem('amethyst.installDismiss')==='1';
+  var standalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+  function icons(){if(window.lucide){try{window.lucide.createIcons();}catch(e){}}}
+  function show(){if(dismissed||standalone)return;bar.classList.remove('hidden');icons();}
+  function hide(){bar.classList.add('hidden');}
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;show();});
+  window.addEventListener('appinstalled',function(){hide();});
+  go.addEventListener('click',async function(){if(deferred){deferred.prompt();try{await deferred.userChoice;}catch(e){}deferred=null;hide();}});
+  x.addEventListener('click',function(){hide();localStorage.setItem('amethyst.installDismiss','1');});
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(isIOS && !standalone && !dismissed){go.classList.add('hidden');txt.innerHTML='<b>Instalar no iPhone</b><br><span>Toque em Compartilhar e “Adicionar à Tela de Início”</span>';setTimeout(show,1200);}
 })();
 </script>
 </body>
