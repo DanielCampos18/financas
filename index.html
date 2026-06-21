@@ -1928,10 +1928,14 @@ async function ghPutFile(obj){
 }
 let pushTimer=null,syncing=false;
 function setSyncStatus(s){if(sync)sync._status=s;const el=document.getElementById("syncStatus");if(el){el.textContent=({enviando:"enviando…",baixando:"baixando…",ok:"sincronizado ✓",erro:"erro de conexão",vazio:"nuvem vazia"})[s]||"";el.style.color=s==="erro"?"var(--danger)":s==="ok"?"var(--success)":"var(--text-muted)";}}
-function schedulePush(){if(!sync||!sync.auto)return;clearTimeout(pushTimer);pushTimer=setTimeout(doPush,1600);}
+function schedulePush(){if(!sync||!sync.auto)return;clearTimeout(pushTimer);pushTimer=setTimeout(()=>doPush(true),1600);}
+function dbRecordCount(d){if(!d)return 0;return (d.expenses||[]).length+(d.investments||[]).length+(d.goals||[]).length+Object.keys(d.income||{}).length;}
 async function doPush(silent){
   if(!sync||syncing)return;
-  try{syncing=true;setSyncStatus("enviando");db.updatedAt=db.updatedAt||new Date().toISOString();await ghPutFile(db);sync.lastSync=new Date().toISOString();saveSync();setSyncStatus("ok");if(!silent)toast("Enviado para a nuvem");}
+  try{syncing=true;
+    // PROTEÇÃO: nunca sobrescrever a nuvem (que tem dados) com um app local vazio
+    if(dbRecordCount(db)===0){const r=await ghGetFile();if(r.exists&&r.json&&dbRecordCount(r.json)>0){sync.sha=r.sha;saveSync();setSyncStatus("ok");if(!silent)toast("Nada para enviar — a nuvem tem dados. Use “Baixar”.","info");return;}}
+    setSyncStatus("enviando");db.updatedAt=db.updatedAt||new Date().toISOString();await ghPutFile(db);sync.lastSync=new Date().toISOString();saveSync();setSyncStatus("ok");if(!silent)toast("Enviado para a nuvem");}
   catch(e){setSyncStatus("erro");if(!silent)toast("Falha ao enviar — verifique o token","error");}
   finally{syncing=false;}
 }
@@ -1949,8 +1953,8 @@ async function initialPull(){
   try{const r=await ghGetFile();
     if(r.exists&&r.json&&Array.isArray(r.json.expenses)){
       sync.sha=r.sha;const remoteAt=r.json.updatedAt||"",localAt=db.updatedAt||"";
-      if(remoteAt>localAt){db=Object.assign(freshDB(),r.json);db.schemaVersion=SCHEMA;save();applyTheme();renderApp();}
-      else if(localAt>remoteAt){doPush(true);}
+      // SÓ PUXA (nunca empurra aqui): adota o remoto se for mais novo, ou se o local estiver vazio e o remoto tiver dados
+      if(remoteAt>localAt || (dbRecordCount(db)===0 && dbRecordCount(r.json)>0)){db=Object.assign(freshDB(),r.json);db.schemaVersion=SCHEMA;save();applyTheme();renderApp();}
       saveSync();setSyncStatus("ok");
     }
   }catch(e){setSyncStatus("erro");}
