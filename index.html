@@ -773,7 +773,7 @@ function animateValue(el,to,fmt=fmtBRL,dur=900){
   if(from===to){el.textContent=fmt(to);return;}
   const t0=performance.now();
   if(el._raf)cancelAnimationFrame(el._raf);
-  const step=now=>{let p=Math.min(1,(now-t0)/dur);p=1-Math.pow(2,-10*p);const v=Math.round(from+(to-from)*p);el.textContent=fmt(v);if(p<1)el._raf=requestAnimationFrame(step);};
+  const step=now=>{const raw=Math.min(1,(now-t0)/dur);const p=raw>=1?1:1-Math.pow(2,-10*raw);const v=Math.round(from+(to-from)*p);el.textContent=fmt(v);if(raw<1)el._raf=requestAnimationFrame(step);else el._raf=null;};
   el._raf=requestAnimationFrame(step);
 }
 function deltaPill(deltaPct){
