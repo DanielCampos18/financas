@@ -1955,6 +1955,11 @@ async function initialPull(){
     }
   }catch(e){setSyncStatus("erro");}
 }
+// puxa automaticamente ao abrir/focar o app (sincroniza entre aparelhos sem precisar reabrir)
+let lastPullAt=0;
+function autoPull(){if(!sync||!sync.auto||syncing)return;const now=Date.now();if(now-lastPullAt<3000)return;lastPullAt=now;initialPull();}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)autoPull();});
+window.addEventListener("focus",autoPull);
 
 // ====================================================================
 // 17. INIT
